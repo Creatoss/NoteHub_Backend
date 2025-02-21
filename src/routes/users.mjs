@@ -12,7 +12,9 @@ userRouter.post(
   checkSchema(createUserValdator),
   userHandler.createUserHandler
 );
-userRouter.post("/api/users/auth",passport.authenticate("local")
+userRouter.post("/api/users/auth",passport.authenticate("local"),(request,response)=>{
+  return response.send({msg:"authentificating..."})
+}
 );
 userRouter.post("/api/users/logout", userHandler.userLogoutHandler);
 
