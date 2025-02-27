@@ -1,6 +1,7 @@
 import { user } from "../mongoose/schema/user.mjs";
 import { validationResult , matchedData} from "express-validator";
-
+import jwt from "jsonwebtoken";
+import { authenticateToken } from "../middleware/user.mjs";
 
 const createUserHandler = async(request,response)=>{
     //console.log('reseveeeeeeeed')
@@ -35,9 +36,19 @@ const userLogoutHandler =(request,response)=>{
             return response.sendStatus(200); 
         })
     }
-
+const getAllUsersHandler = async(request,response)=>{
+    try {
+        const users = await user.find();
+        const token = jwt.sign({users},JWT_SECRET,{expiresIn:'1h'});
+       
+        return response.send({token});
+    } catch (error) {
+        return response.status(500);
+    }
+}
+const JWT_SECRET= "9ach9ech" ; 
 /* tokens do not require server-side storage the server can validate the token without needing to store session data(tokens are statel&ess , each request is treated independently)*/
 /* session require server storage to keep track of user data*/ 
 /* cookies are stored in client-side to remember information about the client-state   */
-const userHandler = {createUserHandler,getUserHandler,userLogoutHandler}
+const userHandler = {createUserHandler,getUserHandler,userLogoutHandler,getAllUsersHandler}
 export default userHandler ; 

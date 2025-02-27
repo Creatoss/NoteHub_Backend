@@ -1,7 +1,7 @@
 import { Strategy } from "passport-local";
 import passport from "passport";
 import { user } from "../mongoose/schema/user.mjs";
-import jwt from "jsonwebtoken";
+
 
 passport.serializeUser((user, done) => {
   console.log(`iniside seialize user ${user.id}`);
