@@ -1,7 +1,7 @@
 import { user } from "../mongoose/schema/user.mjs";
 import { validationResult , matchedData} from "express-validator";
 import jwt from "jsonwebtoken";
-import { authenticateToken } from "../middleware/user.mjs";
+
 
 const createUserHandler = async(request,response)=>{
     //console.log('reseveeeeeeeed')
@@ -18,11 +18,14 @@ const createUserHandler = async(request,response)=>{
 }
 const getUserHandler = async (request,response)=>{
     try {
+        console.log(`user id : ${request.params.id}`);
         const User = await user.findById(request.params.id);
         if (!User) return response.send({msg:'user not found'})
-        return response.send(User) ; 
+        const token = jwt.sign({User},JWT_SECRET,{expiresIn:'1h'});
+        return response.send({token}) ; 
     } catch (error) {
-       return response.status(500)
+
+       return response.send({"msg": `${error}`}); ;
     }
     
 }
@@ -40,12 +43,23 @@ const getAllUsersHandler = async(request,response)=>{
     try {
         const users = await user.find();
         const token = jwt.sign({users},JWT_SECRET,{expiresIn:'1h'});
-       
         return response.send({token});
     } catch (error) {
         return response.status(500);
     }
 }
+/*const getUserHandler = async(request,response)=>{
+    try {
+        const token = request.headers['authorization'];
+        if(!token) return response.sendStatus(401);
+        const decodedToken = jwtDecode(token);
+        if(!decodedToken) return response.sendStatus(401);
+        const users = decodedToken.users;
+        return response.send(users);
+    } catch (error) {
+        return response.status(500);
+    }
+}*/
 const JWT_SECRET= "9ach9ech" ; 
 /* tokens do not require server-side storage the server can validate the token without needing to store session data(tokens are statel&ess , each request is treated independently)*/
 /* session require server storage to keep track of user data*/ 

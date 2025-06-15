@@ -12,8 +12,7 @@ export const authenticateToken = (req, res, next) => {
         if (err) {
             console.log(err);
             return res.sendStatus(403)}; // Forbidden 
-        try{
-            
+        try{     
             const id = tokenUser.User._id;
             const findUser = await user.findById(id);
             console.log(tokenUser,id);

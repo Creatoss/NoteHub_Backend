@@ -16,11 +16,6 @@ userRouter.post(
   checkSchema(createUserValdator),
   userHandler.createUserHandler
 );
-/*userRouter.post("/api/users/auth",passport.authenticate("local"),(request,response)=>{
-  return response.send({msg:"authentificating..."})
-}
-);*/
-
 userRouter.post("/api/users/auth", (req, res, next) => {
   passport.authenticate("local", (err, User, info) => {
     if (err) {
@@ -47,6 +42,7 @@ userRouter.post("/api/users/auth", (req, res, next) => {
   })(req, res, next);
 });
 userRouter.post("/api/users/logout", userHandler.userLogoutHandler);
-userRouter.get("/api/users",authenticateToken,userHandler.getAllUsersHandler); 
+userRouter.get("/api/users", authenticateToken, userHandler.getAllUsersHandler);
+userRouter.get("/api/users/:id", authenticateToken, userHandler.getUserHandler);
 
 export default userRouter;
