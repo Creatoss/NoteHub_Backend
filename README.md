@@ -11,7 +11,7 @@ The project is still in development as I continue learning and improving it.
 - CRUD operations for application resources  
 - Learning-focused project to understand backend concepts
 
-## Project Structure
+## Project Structure 
 
 ├── src/
 │ ├── controllers/ # Logic for handling requests
