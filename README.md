@@ -12,6 +12,7 @@ The project is still in development as I continue learning and improving it.
 - Learning-focused project to understand backend concepts
 
 ## Project Structure
+
 ├── src/
 │ ├── controllers/ # Logic for handling requests
 │ ├── models/ # Mongoose models for MongoDB
@@ -33,6 +34,6 @@ npm install
 npm start
 ```
 
-##Description
+## Description
 
 This project is purely educational and designed to help me understand backend development concepts, authentication flows, and working with databases using Express.js and MongoDB.
