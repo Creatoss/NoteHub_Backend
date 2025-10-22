@@ -12,7 +12,7 @@ The project is still in development as I continue learning and improving it.
 - Learning-focused project to understand backend concepts
 
 ## Project Structure 
-
+```bash
 ├── src/
 │ ├── controllers/ # Logic for handling requests
 │ ├── models/ # Mongoose models for MongoDB
@@ -23,7 +23,7 @@ The project is still in development as I continue learning and improving it.
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-
+```
 ## How to Run
 
 ```bash
